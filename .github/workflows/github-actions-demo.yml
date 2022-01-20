@@ -7,6 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Title - ${{ github.event.pull_request.title }}"
+      - run: echo "${{ github.event.pull_request.title }}" | grep -P '^\[[A-Z]+-[\d]+\] .*'
       - uses: deepakputhraya/action-pr-title@master
         with:
           regex: '^\[[A-Z]+-[\d]+\] .*'
