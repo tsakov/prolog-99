@@ -6,7 +6,7 @@ jobs:
   Validate-PR:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Title: ${{ github.event.pull_request.title }}"
+      - run: echo "Title - ${{ github.event.pull_request.title }}"
       - uses: deepakputhraya/action-pr-title@master
         with:
           regex: '^\[[A-Z]+-[\d]+\] .*'
