@@ -3,11 +3,15 @@ on:
   pull_request:
     types: [opened, edited, synchronize, reopened]
 jobs:
-  Validate-PR:
+  validate-pr-title:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Title - ${{ github.event.pull_request.title }}"
-      - run: echo "${{ github.event.pull_request.title }}" | grep -P '^\[[A-Z]+-[\d]+\] .*'
-      - uses: deepakputhraya/action-pr-title@master
-        with:
-          regex: '^\[[A-Z]+-[\d]+\] .*'
+      - run: |
+          let title="${{ github.event.pull_request.title }}"
+          let pattern='^\[[A-Z]+-[\d]+\] .*'
+          echo $title
+          echo $pattern
+          if [[ $(echo "$title" | grep -cP "$pattern") -eq 0 ]]; then
+            echo 'PR title does not match '
+            echo 'Example: "[BPA-123] My awesome title"'
+          fi
