@@ -7,11 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          let title="${{ github.event.pull_request.title }}"
-          let pattern='^\[[A-Z]+-[\d]+\] .*'
           echo $title
           echo $pattern
           if [[ $(echo "$title" | grep -cP "$pattern") -eq 0 ]]; then
             echo 'PR title does not match '
             echo 'Example: "[BPA-123] My awesome title"'
           fi
+        env:
+          title: ${{ github.event.pull_request.title }}
+          pattern: '^\[[A-Z]+-[\d]+\] .*'
