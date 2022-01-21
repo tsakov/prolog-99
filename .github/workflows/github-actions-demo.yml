@@ -6,13 +6,14 @@ jobs:
   validate-pr-title:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo $title
-          echo $pattern
+      - name: Validate pull request title
+        env:
+          title: ${{ github.event.pull_request.title }}
+          pattern: '^\[[A-Z]+-[\d]+\] .*'
+        run: |
+          echo title is $title
+          echo pattern is $pattern
           if [[ $(echo "$title" | grep -cP "$pattern") -eq 0 ]]; then
             echo 'PR title does not match '
             echo 'Example: "[BPA-123] My awesome title"'
           fi
-        env:
-          title: ${{ github.event.pull_request.title }}
-          pattern: '^\[[A-Z]+-[\d]+\] .*'
