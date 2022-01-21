@@ -12,7 +12,7 @@ jobs:
           pattern: '^\[[A-Z]+-[\d]+\] '
         run: |
           if [[ $(echo "$title" | grep -cP "$pattern") -eq 0 ]]; then
-            echo 'Warning: The pull request title does not match the naming convention!'
+            echo 'ERROR: The pull request title does not match the naming convention!'
             echo 'Example: "[BPA-123] My awesome pull request"'
             exit 1
           fi
