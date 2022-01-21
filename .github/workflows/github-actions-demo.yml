@@ -9,7 +9,7 @@ jobs:
       - name: Validate pull request title
         env:
           title: ${{ github.event.pull_request.title }}
-          pattern: '^\[[A-Z]+-[\d]+\] '
+          pattern: '^\[[A-Z]+-\d+\] '
         run: |
           if [[ $(echo "$title" | grep -cP "$pattern") -eq 0 ]]; then
             echo 'ERROR: The pull request title does not match the naming convention!'
