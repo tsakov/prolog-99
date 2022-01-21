@@ -9,7 +9,7 @@ jobs:
       - name: Validate pull request title
         env:
           title: ${{ github.event.pull_request.title }}
-          pattern: '^\[[A-Z]+-[\d]+\] .*'
+          pattern: '^\[[A-Z]+-[\d]+\] '
         run: |
           echo title is $title
           echo pattern is $pattern
